@@ -1,0 +1,641 @@
+<template>
+  <nav class="nav container">
+    <div class="nav__data">
+      <a href="#" class="nav__logo">
+        <i class="material-icons">code</i> CodeBox
+      </a>
+
+      <div class="nav__toggle" id="nav-toggle" @click="toggleMenu">
+        <i class="material-icons nav__toggle-menu" >menu</i>
+        <i class="material-icons nav__toggle-close">close</i>
+      </div>
+    </div>
+
+    <!--=============== NAV MENU ===============-->
+    <div class="nav__menu" id="nav-menu" :class="{ 'show-menu': isMenuOpen }">
+      <ul class="nav__list">
+        <li>
+          <a href="#" class="nav__link">Home</a>
+        </li>
+
+        <!--=============== DROPDOWN 1 ===============-->
+        <li class="dropdown__item">
+          <div class="nav__link dropdown__button" @click="toggleDropdown">
+            Discover <i class="material-icons dropdown__arrow" >arrow_drop_down</i>
+          </div>
+
+          <div class="dropdown__container">
+            <div class="dropdown__content">
+              <div class="dropdown__group">
+                <div class="dropdown__icon">
+                  <i class="material-icons">flash_on</i>
+                </div>
+
+                <span class="dropdown__title">Most viewed courses</span>
+
+                <ul class="dropdown__list">
+                  <li>
+                    <a href="#" class="dropdown__link">HTML for beginners</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Advanced CSS</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">JavaScript OOP</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="dropdown__group">
+                <div class="dropdown__icon">
+                  <i class="material-icons">favorite</i>
+                </div>
+
+                <span class="dropdown__title">Popular courses</span>
+
+                <ul class="dropdown__list">
+                  <li>
+                    <a href="#" class="dropdown__link">Development with Flutter</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Web development with React</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Backend development expert</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="dropdown__group">
+                <div class="dropdown__icon">
+                  <i class="material-icons">book</i>
+                </div>
+
+                <span class="dropdown__title">Careers</span>
+
+                <ul class="dropdown__list">
+                  <li>
+                    <a href="#" class="dropdown__link">Web development</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Applications development</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">UI/UX design</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Informatic security</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="dropdown__group">
+                <div class="dropdown__icon">
+                  <i class="material-icons">library_books</i>
+                </div>
+
+                <span class="dropdown__title">Certifications</span>
+
+                <ul class="dropdown__list">
+                  <li>
+                    <a href="#" class="dropdown__link">Course certificates</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Free certifications</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!--=============== DROPDOWN 2 ===============-->
+        <li class="dropdown__item">
+          <div class="nav__link dropdown__button" @click="toggleDropdown">
+            Resources <i class="material-icons dropdown__arrow">arrow_drop_down</i>
+          </div>
+
+          <div class="dropdown__container">
+            <div class="dropdown__content">
+              <div class="dropdown__group">
+                <div class="dropdown__icon">
+                  <i class="material-icons">code</i>
+                </div>
+
+                <span class="dropdown__title">Web templates</span>
+
+                <ul class="dropdown__list">
+                  <li>
+                    <a href="#" class="dropdown__link">Free templates</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Premium templates</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="dropdown__group">
+                <div class="dropdown__icon">
+                  <i class="material-icons">draw</i>
+                </div>
+
+                <span class="dropdown__title">Designs</span>
+
+                <ul class="dropdown__list">
+                  <li>
+                    <a href="#" class="dropdown__link">Web designs</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">App designs</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Component design</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="dropdown__group">
+                <div class="dropdown__icon">
+                  <i class="material-icons">drag_indicator</i>
+                </div>
+
+                <span class="dropdown__title">Others</span>
+
+                <ul class="dropdown__list">
+                  <li>
+                    <a href="#" class="dropdown__link">Recent blogs</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Tutorial videos</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Webinar</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          <a href="#" class="nav__link">Pricing</a>
+        </li>
+
+        <!--=============== DROPDOWN 3 ===============-->
+        <li class="dropdown__item">
+          <div class="nav__link dropdown__button" @click="toggleDropdown">
+            Company <i class="material-icons dropdown__arrow">arrow_drop_down</i>
+          </div>
+
+          <div class="dropdown__container">
+            <div class="dropdown__content">
+              <div class="dropdown__group">
+                <div class="dropdown__icon">
+                  <i class="material-icons">home_repair_service</i>
+                </div>
+
+                <span class="dropdown__title">About us</span>
+
+                <ul class="dropdown__list">
+                  <li>
+                    <a href="#" class="dropdown__link">About us</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Support</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Contact us</a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="dropdown__group">
+                <div class="dropdown__icon">
+                  <i class="material-icons">shield</i>
+                </div>
+
+                <span class="dropdown__title">Safety and quality</span>
+
+                <ul class="dropdown__list">
+                  <li>
+                    <a href="#" class="dropdown__link">Cookie settings</a>
+                  </li>
+                  <li>
+                    <a href="#" class="dropdown__link">Privacy Policy</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</template>
+
+<script >
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const isMenuOpen = ref(false);
+    const dropdownItems = ref([]);
+    const showDropdownIndex = ref(null);
+
+    // Function to toggle the main menu
+    const toggleMenu = () => {
+      isMenuOpen.value = !isMenuOpen.value;
+    };
+
+    // Function to toggle a specific dropdown
+    const toggleDropdown = (index) => {
+      const nextSibling = index.target.nextSibling
+      console.log(nextSibling)
+      if (nextSibling) {
+        const hasHeight = nextSibling.style.height !== '';
+
+        if (hasHeight) {
+          nextSibling.style.height = '';
+        } else {
+          // Ajusta aquí el valor del height que deseas agregar
+          nextSibling.style.height = '750px';
+        }
+      }
+      
+    };
+
+    // Function to remove dropdown styles in mobile mode when browser resizes
+    const removeStyle = () => {
+      const mediaQuery = window.matchMedia('(min-width: 1118px)');
+
+      if (mediaQuery.matches) {
+        dropdownItems.value.forEach((item) => {
+          item.classList.remove('show-dropdown');
+        });
+        showDropdownIndex.value = null;
+      }
+    };
+
+    // Register the event listener for resizing
+    window.addEventListener('resize', removeStyle);
+
+    return {
+      isMenuOpen,
+      dropdownItems,
+      toggleMenu,
+      showDropdownIndex,
+      toggleDropdown,
+    };
+  },
+};
+</script>
+
+<style lang="scss">/*=============== GOOGLE FONTS ===============*/
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins/Poppins-Regular.ttf') format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins/Poppins-Medium.ttf') format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../assets/fonts/Poppins/Poppins-SemiBold.ttf') format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+  
+  /*=============== VARIABLES CSS ===============*/
+:root {
+  --header-height: 3.5rem;
+  /*========== Colors ==========*/
+  /*Color mode HSL(hue, saturation, lightness)*/
+  --first-color: hsl(220, 68%, 54%);
+  --first-color-lighten: hsl(220, 68%, 97%);
+  --title-color: hsl(220, 48%, 28%);
+  --text-color: hsl(220, 12%, 45%);
+  --body-color: hsl(220, 100%, 99%);
+  /*========== Font and typography ==========*/
+  /*.5rem = 8px | 1rem = 16px ...*/
+  --body-font: "Poppins", sans-serif;
+  --normal-font-size: .938rem; 
+  --small-font-size: .813rem;
+  --smaller-font-size: .75rem;
+  /*========== Font weight ==========*/
+  --font-medium: 500;
+  --font-semi-bold: 600;
+  /*========== z index ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+}
+@media screen and (min-width: 1024px) {
+  :root {
+    --normal-font-size: 1rem;
+    --small-font-size: .875rem;
+    --smaller-font-size: .813rem;
+  }
+}
+
+/*=============== BASE ===============*/
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--body-color);
+  color: var(--text-color);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*=============== REUSABLE CSS CLASSES ===============*/
+.container {
+  max-width: 1120px;
+  margin-inline: 1.5rem;
+}
+
+/*=============== HEADER ===============*/
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-shadow: 0 2px 8px hsla(220, 68%, 12%, 0.1);
+  background-color: var(--body-color);
+  z-index: var(--z-fixed);
+}
+
+/*=============== NAV ===============*/
+.nav {
+  height: var(--header-height);
+}
+.nav__data {
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav__logo {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 0.25rem;
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  transition: color 0.3s;
+}
+.nav__logo i {
+  font-size: 1.25rem;
+}
+.nav__logo:hover {
+  color: var(--first-color);
+}
+.nav__toggle {
+  position: relative;
+  width: 32px;
+  height: 32px;
+}
+.nav__toggle-menu, .nav__toggle-close {
+  font-size: 1.25rem;
+  color: var(--title-color);
+  position: absolute;
+  display: grid;
+  place-items: center;
+  inset: 0;
+  cursor: pointer;
+  transition: opacity 0.1s, transform 0.4s;
+}
+.nav__toggle-close {
+  opacity: 0;
+}
+@media screen and (max-width: 1118px) {
+  .nav__menu {
+    background-color: var(--body-color);
+    position: absolute;
+    left: 0;
+    top: 2.5rem;
+    width: 100%;
+    height: calc(100vh - 3.5rem);
+    overflow: auto;
+    padding-block: 1.5rem 4rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: top 0.4s, opacity 0.3s;
+  }
+  .nav__menu::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  .nav__menu::-webkit-scrollbar-thumb {
+    background-color: hsl(220, 12%, 70%);
+  }
+}
+.nav__link {
+  color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s;
+}
+.nav__link:hover {
+  background-color: var(--first-color-lighten);
+}
+
+/* Show menu */
+.show-menu {
+  opacity: 1;
+  top: 3.5rem;
+  pointer-events: initial;
+}
+
+/* Show icon */
+.show-icon .nav__toggle-menu {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.show-icon .nav__toggle-close {
+  opacity: 1;
+  transform: rotate(90deg);
+}
+
+/*=============== DROPDOWN ===============*/
+.dropdown__button {
+  cursor: pointer;
+}
+.dropdown__arrow {
+  font-size: 1.5rem;
+  font-weight: initial;
+  transition: transform 0.4s;
+}
+.dropdown__content, .dropdown__group, .dropdown__list {
+  display: grid;
+}
+.dropdown__container {
+  background-color: var(--first-color-lighten);
+  height: 0;
+  overflow: hidden;
+  transition: height 0.4s;
+}
+.dropdown__content {
+  row-gap: 1.75rem;
+}
+.dropdown__group {
+  padding-left: 2.5rem;
+  row-gap: 0.5rem;
+}
+.dropdown__group:first-child {
+  margin-top: 1.25rem;
+}
+.dropdown__group:last-child {
+  margin-bottom: 1.25rem;
+}
+.dropdown__icon i {
+  font-size: 1.25rem;
+  color: var(--first-color);
+}
+.dropdown__title {
+  font-size: var(--small-font-size);
+  font-weight: var(--font-semi-bold);
+  color: var(--title-color);
+}
+.dropdown__list {
+  row-gap: 0.25rem;
+}
+.dropdown__link {
+  font-size: var(--smaller-font-size);
+  font-weight: var(--font-medium);
+  color: var(--text-color);
+  transition: color 0.3s;
+}
+.dropdown__link:hover {
+  color: var(--title-color);
+}
+
+/* Rotate dropdown icon */
+.show-dropdown .dropdown__arrow {
+  transform: rotate(180deg);
+}
+
+/*=============== BREAKPOINTS ===============*/
+/* For small devices */
+@media screen and (max-width: 300px) {
+  .dropdown__group {
+    padding-left: 1.5rem;
+  }
+}
+/* For large devices */
+@media screen and (min-width: 1118px) {
+  /* Nav */
+  .nav {
+    height: calc(var(--header-height) + 2rem);
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav__toggle {
+    display: none;
+  }
+  .nav__list {
+    display: flex;
+    column-gap: 3rem;
+    height: 100%;
+  }
+  .nav li {
+    display: flex;
+  }
+  .nav__link {
+    padding: 0;
+  }
+  .nav__link:hover {
+    background-color: initial;
+  }
+  /* Dropdown */
+  .dropdown__button {
+    column-gap: 0.25rem;
+    pointer-events: none;
+  }
+  .dropdown__container {
+    height: max-content;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 6.5rem;
+    background-color: var(--body-color);
+    box-shadow: 0 6px 8px hsla(220, 68%, 12%, 0.05);
+    pointer-events: none;
+    opacity: 0;
+    transition: top 0.4s, opacity 0.3s;
+  }
+  .dropdown__content {
+    grid-template-columns: repeat(4, max-content);
+    column-gap: 6rem;
+    max-width: 1120px;
+    margin-inline: auto;
+  }
+  .dropdown__group {
+    padding: 4rem 0;
+    align-content: baseline;
+    row-gap: 1.25rem;
+  }
+  .dropdown__group:first-child, .dropdown__group:last-child {
+    margin: 0;
+  }
+  .dropdown__list {
+    row-gap: 0.75rem;
+  }
+  .dropdown__icon {
+    width: 60px;
+    height: 60px;
+    background-color: var(--first-color-lighten);
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    margin-bottom: 1rem;
+  }
+  .dropdown__icon i {
+    font-size: 2rem;
+  }
+  .dropdown__title {
+    font-size: var(--normal-font-size);
+  }
+  .dropdown__link {
+    font-size: var(--small-font-size);
+  }
+  .dropdown__link:hover {
+    color: var(--first-color);
+  }
+  .dropdown__item {
+    cursor: pointer;
+  }
+  .dropdown__item:hover .dropdown__arrow {
+    transform: rotate(180deg);
+  }
+  .dropdown__item:hover > .dropdown__container {
+    top: 5.5rem;
+    opacity: 1;
+    pointer-events: initial;
+    cursor: initial;
+  }
+}
+@media screen and (min-width: 1152px) {
+  .container {
+    margin-inline: auto;
+  }
+}
+</style>
