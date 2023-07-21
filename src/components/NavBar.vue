@@ -6,7 +6,7 @@
       </a>
 
       <div class="nav__toggle" id="nav-toggle" @click="toggleMenu">
-        <i class="material-icons nav__toggle-menu" >menu</i>
+        <i class="material-icons nav__toggle-menu">menu</i>
         <i class="material-icons nav__toggle-close">close</i>
       </div>
     </div>
@@ -18,10 +18,34 @@
           <a href="#" class="nav__link">Home</a>
         </li>
 
-        <!--=============== DROPDOWN 1 ===============-->
-        <li class="dropdown__item">
+        <!-- ============ DROPDOWN ELEMENTS ============= -->
+        <li class="dropdown__item" v-for="item in props.category" :key="item">
           <div class="nav__link dropdown__button" @click="toggleDropdown">
-            Discover <i class="material-icons dropdown__arrow" >arrow_drop_down</i>
+            {{item.title}} <i class="material-icons dropdown__arrow">arrow_drop_down</i>
+          </div>
+
+          <div class="dropdown__container">
+            <div class="dropdown__content">
+              <div class="dropdown__group" v-for="subcategory in item.subcategory" :key="subcategory.title">
+                <div class="dropdown__icon">
+                  <i class="material-icons">{{subcategory.icon}}</i>
+                </div>
+
+                <span class="dropdown__title">{{ subcategory.title }}</span>
+
+                <ul class="dropdown__list">
+                  <li v-for="link in subcategory.links" :key="link.title">
+                    <a :href="link.route" class="dropdown__link">{{ link.title }}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </li>
+        <!--=============== DROPDOWN 1 ===============-->
+       <li class="dropdown__item">
+          <div class="nav__link dropdown__button" @click="toggleDropdown">
+            Discover <i class="material-icons dropdown__arrow">arrow_drop_down</i>
           </div>
 
           <div class="dropdown__container">
@@ -107,7 +131,7 @@
               </div>
             </div>
           </div>
-        </li>
+        </li> 
 
         <!--=============== DROPDOWN 2 ===============-->
         <li class="dropdown__item">
@@ -233,64 +257,112 @@
   </nav>
 </template>
 
-<script >
-import { ref } from 'vue';
+<script setup>
+import { ref, defineProps } from 'vue';
 
-export default {
-  setup() {
-    const isMenuOpen = ref(false);
-    const dropdownItems = ref([]);
-    const showDropdownIndex = ref(null);
+const isMenuOpen = ref(false);
+const dropdownItems = ref([]);
+const showDropdownIndex = ref(null);
 
-    // Function to toggle the main menu
-    const toggleMenu = () => {
-      isMenuOpen.value = !isMenuOpen.value;
-    };
-
-    // Function to toggle a specific dropdown
-    const toggleDropdown = (index) => {
-      const nextSibling = index.target.nextSibling
-      console.log(nextSibling)
-      if (nextSibling) {
-        const hasHeight = nextSibling.style.height !== '';
-
-        if (hasHeight) {
-          nextSibling.style.height = '';
-        } else {
-          // Ajusta aquí el valor del height que deseas agregar
-          nextSibling.style.height = '750px';
+const props = defineProps({
+  category: {
+    type: Array,
+    required: false,
+    default() {
+      return [
+        {
+          title: 'Discover', // tiene sub elementos, cada elemento tiene : titulo, icono, links
+          subcategory: [
+             {  
+                title: 'Most viewed courses',
+                icon: 'flash_on',
+                links: [
+                  {
+                    title: 'HTML for beginners', 
+                    route:'#'
+                  },
+                  {
+                    title: 'Advanced CSS',
+                    route: '#',
+                  },
+                  {
+                    title: 'Javascript OOP',
+                    route: '#'
+                  }
+                ]
+              },
+              {
+                title: 'Popular courses',
+                icon: 'favorite',
+                links: [
+                  {
+                    title: 'Development with Flutter',
+                    route: '#'
+                  },
+                  {
+                    title: 'Web development with React',
+                    route: '#'
+                  },
+                  {
+                    title: 'Backend development expert',
+                    route: '#'
+                  }
+                ]
+              }
+        ],
+        
         }
-      }
-      
-    };
+      ]
+    }
+  }
+})
 
-    // Function to remove dropdown styles in mobile mode when browser resizes
-    const removeStyle = () => {
-      const mediaQuery = window.matchMedia('(min-width: 1118px)');
+console.log(props)
 
-      if (mediaQuery.matches) {
-        dropdownItems.value.forEach((item) => {
-          item.classList.remove('show-dropdown');
-        });
-        showDropdownIndex.value = null;
-      }
-    };
-
-    // Register the event listener for resizing
-    window.addEventListener('resize', removeStyle);
-
-    return {
-      isMenuOpen,
-      dropdownItems,
-      toggleMenu,
-      showDropdownIndex,
-      toggleDropdown,
-    };
-  },
+// Function to toggle the main menu
+const toggleMenu = () => {
+  isMenuOpen.value = !isMenuOpen.value;
 };
+
+// Function to toggle a specific dropdown
+ const toggleDropdown = (index) => {
+  const nextSibling = index.target.nextSibling
+  console.log(nextSibling)
+  if (nextSibling) {
+    const hasHeight = nextSibling.style.height !== '';
+
+    if (hasHeight) {
+      nextSibling.style.height = '';
+    } else {
+      // Ajusta aquí el valor del height que deseas agregar
+      nextSibling.style.height = '750px';
+    }
+  }
+
+}; 
+
+// Function to remove dropdown styles in mobile mode when browser resizes
+const removeStyle = () => {
+  const mediaQuery = window.matchMedia('(min-width: 1118px)');
+
+  if (mediaQuery.matches) {
+    dropdownItems.value.forEach((item) => {
+      item.classList.remove('show-dropdown');
+    });
+    showDropdownIndex.value = null;
+  }
+};
+
+// Register the event listener for resizing
+window.addEventListener('resize', removeStyle);
+
+
+
+
 </script>
 
-<style lang="scss">/*=============== GOOGLE FONTS ===============*/
+<style lang="scss">
+/*=============== GOOGLE FONTS ===============*/
 
 @font-face {
   font-family: 'Poppins';
@@ -298,20 +370,22 @@ export default {
   font-weight: 400;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Poppins';
   src: url('../assets/fonts/Poppins/Poppins-Medium.ttf') format("truetype");
   font-weight: 600;
   font-style: normal;
 }
+
 @font-face {
   font-family: 'Poppins';
   src: url('../assets/fonts/Poppins/Poppins-SemiBold.ttf') format("truetype");
   font-weight: 800;
   font-style: normal;
 }
-  
-  /*=============== VARIABLES CSS ===============*/
+
+/*=============== VARIABLES CSS ===============*/
 :root {
   --header-height: 3.5rem;
   /*========== Colors ==========*/
@@ -324,7 +398,7 @@ export default {
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/
   --body-font: "Poppins", sans-serif;
-  --normal-font-size: .938rem; 
+  --normal-font-size: .938rem;
   --small-font-size: .813rem;
   --smaller-font-size: .75rem;
   /*========== Font weight ==========*/
@@ -334,6 +408,7 @@ export default {
   --z-tooltip: 10;
   --z-fixed: 100;
 }
+
 @media screen and (min-width: 1024px) {
   :root {
     --normal-font-size: 1rem;
@@ -385,12 +460,14 @@ a {
 .nav {
   height: var(--header-height);
 }
+
 .nav__data {
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
+
 .nav__logo {
   display: inline-flex;
   align-items: center;
@@ -399,18 +476,23 @@ a {
   font-weight: var(--font-semi-bold);
   transition: color 0.3s;
 }
+
 .nav__logo i {
   font-size: 1.25rem;
 }
+
 .nav__logo:hover {
   color: var(--first-color);
 }
+
 .nav__toggle {
   position: relative;
   width: 32px;
   height: 32px;
 }
-.nav__toggle-menu, .nav__toggle-close {
+
+.nav__toggle-menu,
+.nav__toggle-close {
   font-size: 1.25rem;
   color: var(--title-color);
   position: absolute;
@@ -420,9 +502,11 @@ a {
   cursor: pointer;
   transition: opacity 0.1s, transform 0.4s;
 }
+
 .nav__toggle-close {
   opacity: 0;
 }
+
 @media screen and (max-width: 1118px) {
   .nav__menu {
     background-color: var(--body-color);
@@ -437,13 +521,16 @@ a {
     opacity: 0;
     transition: top 0.4s, opacity 0.3s;
   }
+
   .nav__menu::-webkit-scrollbar {
     width: 0.5rem;
   }
+
   .nav__menu::-webkit-scrollbar-thumb {
     background-color: hsl(220, 12%, 70%);
   }
 }
+
 .nav__link {
   color: var(--title-color);
   font-weight: var(--font-semi-bold);
@@ -453,6 +540,7 @@ a {
   align-items: center;
   transition: background-color 0.3s;
 }
+
 .nav__link:hover {
   background-color: var(--first-color-lighten);
 }
@@ -479,51 +567,67 @@ a {
 .dropdown__button {
   cursor: pointer;
 }
+
 .dropdown__arrow {
   font-size: 1.5rem;
   font-weight: initial;
   transition: transform 0.4s;
 }
-.dropdown__content, .dropdown__group, .dropdown__list {
+
+.dropdown__content,
+.dropdown__group,
+.dropdown__list {
   display: grid;
+  justify-content: space-between;
+  justify-items: center;
 }
+
 .dropdown__container {
   background-color: var(--first-color-lighten);
   height: 0;
   overflow: hidden;
   transition: height 0.4s;
 }
+
 .dropdown__content {
   row-gap: 1.75rem;
 }
+
 .dropdown__group {
   padding-left: 2.5rem;
   row-gap: 0.5rem;
 }
+
 .dropdown__group:first-child {
   margin-top: 1.25rem;
 }
+
 .dropdown__group:last-child {
   margin-bottom: 1.25rem;
 }
+
 .dropdown__icon i {
   font-size: 1.25rem;
   color: var(--first-color);
 }
+
 .dropdown__title {
   font-size: var(--small-font-size);
   font-weight: var(--font-semi-bold);
   color: var(--title-color);
 }
+
 .dropdown__list {
   row-gap: 0.25rem;
 }
+
 .dropdown__link {
   font-size: var(--smaller-font-size);
   font-weight: var(--font-medium);
   color: var(--text-color);
   transition: color 0.3s;
 }
+
 .dropdown__link:hover {
   color: var(--title-color);
 }
@@ -540,36 +644,45 @@ a {
     padding-left: 1.5rem;
   }
 }
+
 /* For large devices */
 @media screen and (min-width: 1118px) {
+
   /* Nav */
   .nav {
     height: calc(var(--header-height) + 2rem);
     display: flex;
     justify-content: space-between;
   }
+
   .nav__toggle {
     display: none;
   }
+
   .nav__list {
     display: flex;
     column-gap: 3rem;
     height: 100%;
   }
+
   .nav li {
     display: flex;
   }
+
   .nav__link {
     padding: 0;
   }
+
   .nav__link:hover {
     background-color: initial;
   }
+
   /* Dropdown */
   .dropdown__button {
     column-gap: 0.25rem;
     pointer-events: none;
   }
+
   .dropdown__container {
     height: max-content;
     position: absolute;
@@ -582,23 +695,29 @@ a {
     opacity: 0;
     transition: top 0.4s, opacity 0.3s;
   }
+
   .dropdown__content {
     grid-template-columns: repeat(4, max-content);
     column-gap: 6rem;
     max-width: 1120px;
     margin-inline: auto;
   }
+
   .dropdown__group {
     padding: 4rem 0;
     align-content: baseline;
     row-gap: 1.25rem;
   }
-  .dropdown__group:first-child, .dropdown__group:last-child {
+
+  .dropdown__group:first-child,
+  .dropdown__group:last-child {
     margin: 0;
   }
+
   .dropdown__list {
     row-gap: 0.75rem;
   }
+
   .dropdown__icon {
     width: 60px;
     height: 60px;
@@ -608,34 +727,41 @@ a {
     place-items: center;
     margin-bottom: 1rem;
   }
+
   .dropdown__icon i {
     font-size: 2rem;
   }
+
   .dropdown__title {
     font-size: var(--normal-font-size);
   }
+
   .dropdown__link {
     font-size: var(--small-font-size);
   }
+
   .dropdown__link:hover {
     color: var(--first-color);
   }
+
   .dropdown__item {
     cursor: pointer;
   }
+
   .dropdown__item:hover .dropdown__arrow {
     transform: rotate(180deg);
   }
-  .dropdown__item:hover > .dropdown__container {
+
+  .dropdown__item:hover>.dropdown__container {
     top: 5.5rem;
     opacity: 1;
     pointer-events: initial;
     cursor: initial;
   }
 }
+
 @media screen and (min-width: 1152px) {
   .container {
     margin-inline: auto;
   }
-}
-</style>
+}</style>
