@@ -20,8 +20,8 @@
 
         <!-- ============ DROPDOWN ELEMENTS ============= -->
         <li class="dropdown__item" v-for="item in props.category" :key="item">
-          <div class="nav__link dropdown__button" @click="toggleDropdown">
-            {{item.title}} <i class="material-icons dropdown__arrow">arrow_drop_down</i>
+          <div class="nav__link dropdown__button" @click="toggleDropdown" :data-tittle="item.title">
+            {{item.title}} <i class="material-icons dropdown__arrow" style="pointer-events: none;">arrow_drop_down</i>
           </div>
 
           <div class="dropdown__container">
@@ -31,10 +31,10 @@
                   <i class="material-icons">{{subcategory.icon}}</i>
                 </div>
 
-                <span class="dropdown__title">{{ subcategory.title }}</span>
+                <span class="dropdown__title" >{{ subcategory.title }}</span>
 
                 <ul class="dropdown__list">
-                  <li v-for="link in subcategory.links" :key="link.title">
+                  <li v-for="link in subcategory.links.slice(0,3)" :key="link.title">
                     <a :href="link.route" class="dropdown__link">{{ link.title }}</a>
                   </li>
                 </ul>
@@ -45,7 +45,7 @@
         <!--=============== DROPDOWN 1 ===============-->
        <li class="dropdown__item">
           <div class="nav__link dropdown__button" @click="toggleDropdown">
-            Discover <i class="material-icons dropdown__arrow">arrow_drop_down</i>
+            Discover <i class="material-icons dropdown__arrow" >arrow_drop_down</i>
           </div>
 
           <div class="dropdown__container">
@@ -258,7 +258,7 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from 'vue';
+import { ref } from 'vue';
 
 const isMenuOpen = ref(false);
 const dropdownItems = ref([]);
@@ -273,7 +273,7 @@ const props = defineProps({
         {
           title: 'Discover', // tiene sub elementos, cada elemento tiene : titulo, icono, links
           subcategory: [
-             {  
+              {  
                 title: 'Most viewed courses',
                 icon: 'flash_on',
                 links: [
@@ -317,8 +317,6 @@ const props = defineProps({
   }
 })
 
-console.log(props)
-
 // Function to toggle the main menu
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value;
@@ -327,21 +325,19 @@ const toggleMenu = () => {
 // Function to toggle a specific dropdown
  const toggleDropdown = (index) => {
   const nextSibling = index.target.nextSibling
-  console.log(nextSibling)
+  const title = index?.target?.dataset?.tittle;
+  const category = props.category.find(value => value.title === title)
+  
   if (nextSibling) {
     const hasHeight = nextSibling.style.height !== '';
+    const dropdownHeight = category.subcategory.length * 180
 
-    if (hasHeight) {
-      nextSibling.style.height = '';
-    } else {
-      // Ajusta aquí el valor del height que deseas agregar
-      nextSibling.style.height = '750px';
-    }
+    if (hasHeight) nextSibling.style.height = '';
+    else nextSibling.style.height = `${dropdownHeight}px`;
   }
 
 }; 
 
-// Function to remove dropdown styles in mobile mode when browser resizes
 const removeStyle = () => {
   const mediaQuery = window.matchMedia('(min-width: 1118px)');
 
@@ -539,6 +535,7 @@ a {
   justify-content: space-between;
   align-items: center;
   transition: background-color 0.3s;
+  z-index: 99;
 }
 
 .nav__link:hover {
@@ -572,6 +569,7 @@ a {
   font-size: 1.5rem;
   font-weight: initial;
   transition: transform 0.4s;
+  z-index: 1;
 }
 
 .dropdown__content,
