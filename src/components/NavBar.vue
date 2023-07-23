@@ -20,9 +20,15 @@
 
         <!-- ============ DROPDOWN ELEMENTS ============= -->
         <li class="dropdown__item" v-for="item in props.category" :key="item">
-          <div class="nav__link dropdown__button" @click="toggleDropdown" :data-tittle="item.title">
-            {{item.title}} <i class="material-icons dropdown__arrow" style="pointer-events: none;">arrow_drop_down</i>
+          <div class="nav__link dropdown__button" 
+              v-if="item.subcategory"
+              @click="toggleDropdown"
+              :data-tittle="item.title">
+            <span>{{item.title}}</span>
+            <i class="material-icons dropdown__arrow" style="pointer-events: none;">arrow_drop_down</i>
           </div>
+
+          <a v-else :href="item.route" class="nav__link">{{ item.title }}</a>         
 
           <div class="dropdown__container">
             <div class="dropdown__content">
@@ -36,216 +42,6 @@
                 <ul class="dropdown__list">
                   <li v-for="link in subcategory.links.slice(0,3)" :key="link.title">
                     <a :href="link.route" class="dropdown__link">{{ link.title }}</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-        <!--=============== DROPDOWN 1 ===============-->
-       <li class="dropdown__item">
-          <div class="nav__link dropdown__button" @click="toggleDropdown">
-            Discover <i class="material-icons dropdown__arrow" >arrow_drop_down</i>
-          </div>
-
-          <div class="dropdown__container">
-            <div class="dropdown__content">
-              <div class="dropdown__group">
-                <div class="dropdown__icon">
-                  <i class="material-icons">flash_on</i>
-                </div>
-
-                <span class="dropdown__title">Most viewed courses</span>
-
-                <ul class="dropdown__list">
-                  <li>
-                    <a href="#" class="dropdown__link">HTML for beginners</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Advanced CSS</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">JavaScript OOP</a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="dropdown__group">
-                <div class="dropdown__icon">
-                  <i class="material-icons">favorite</i>
-                </div>
-
-                <span class="dropdown__title">Popular courses</span>
-
-                <ul class="dropdown__list">
-                  <li>
-                    <a href="#" class="dropdown__link">Development with Flutter</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Web development with React</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Backend development expert</a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="dropdown__group">
-                <div class="dropdown__icon">
-                  <i class="material-icons">book</i>
-                </div>
-
-                <span class="dropdown__title">Careers</span>
-
-                <ul class="dropdown__list">
-                  <li>
-                    <a href="#" class="dropdown__link">Web development</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Applications development</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">UI/UX design</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Informatic security</a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="dropdown__group">
-                <div class="dropdown__icon">
-                  <i class="material-icons">library_books</i>
-                </div>
-
-                <span class="dropdown__title">Certifications</span>
-
-                <ul class="dropdown__list">
-                  <li>
-                    <a href="#" class="dropdown__link">Course certificates</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Free certifications</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li> 
-
-        <!--=============== DROPDOWN 2 ===============-->
-        <li class="dropdown__item">
-          <div class="nav__link dropdown__button" @click="toggleDropdown">
-            Resources <i class="material-icons dropdown__arrow">arrow_drop_down</i>
-          </div>
-
-          <div class="dropdown__container">
-            <div class="dropdown__content">
-              <div class="dropdown__group">
-                <div class="dropdown__icon">
-                  <i class="material-icons">code</i>
-                </div>
-
-                <span class="dropdown__title">Web templates</span>
-
-                <ul class="dropdown__list">
-                  <li>
-                    <a href="#" class="dropdown__link">Free templates</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Premium templates</a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="dropdown__group">
-                <div class="dropdown__icon">
-                  <i class="material-icons">draw</i>
-                </div>
-
-                <span class="dropdown__title">Designs</span>
-
-                <ul class="dropdown__list">
-                  <li>
-                    <a href="#" class="dropdown__link">Web designs</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">App designs</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Component design</a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="dropdown__group">
-                <div class="dropdown__icon">
-                  <i class="material-icons">drag_indicator</i>
-                </div>
-
-                <span class="dropdown__title">Others</span>
-
-                <ul class="dropdown__list">
-                  <li>
-                    <a href="#" class="dropdown__link">Recent blogs</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Tutorial videos</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Webinar</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </li>
-
-        <li>
-          <a href="#" class="nav__link">Pricing</a>
-        </li>
-
-        <!--=============== DROPDOWN 3 ===============-->
-        <li class="dropdown__item">
-          <div class="nav__link dropdown__button" @click="toggleDropdown">
-            Company <i class="material-icons dropdown__arrow">arrow_drop_down</i>
-          </div>
-
-          <div class="dropdown__container">
-            <div class="dropdown__content">
-              <div class="dropdown__group">
-                <div class="dropdown__icon">
-                  <i class="material-icons">home_repair_service</i>
-                </div>
-
-                <span class="dropdown__title">About us</span>
-
-                <ul class="dropdown__list">
-                  <li>
-                    <a href="#" class="dropdown__link">About us</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Support</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Contact us</a>
-                  </li>
-                </ul>
-              </div>
-
-              <div class="dropdown__group">
-                <div class="dropdown__icon">
-                  <i class="material-icons">shield</i>
-                </div>
-
-                <span class="dropdown__title">Safety and quality</span>
-
-                <ul class="dropdown__list">
-                  <li>
-                    <a href="#" class="dropdown__link">Cookie settings</a>
-                  </li>
-                  <li>
-                    <a href="#" class="dropdown__link">Privacy Policy</a>
                   </li>
                 </ul>
               </div>
@@ -308,9 +104,140 @@ const props = defineProps({
                     route: '#'
                   }
                 ]
+              },
+              {
+                title: 'Careers',
+                icon: 'book',
+                links: [
+                  {
+                    title: 'Web development',
+                    route: '#'
+                  },
+                  {
+                    title: 'Applications development',
+                    route: '#'
+                  },
+                  {
+                    title: 'UI/UX design',
+                    route: '#'
+                  },
+                  {
+                    title: 'Informatic security',
+                    route: '#'
+                  }
+                ]
+              },
+              {
+                title: 'Certifications',
+                icon: 'library_books',
+                links: [
+                  {
+                    title: 'Course certificates',
+                    route: '#'
+                  },
+                  {
+                    title: 'Free certifications',
+                    route: '#'
+                  }
+                ]
               }
-        ],
-        
+          ],
+        },
+        {
+          title: 'Resources',
+          subcategory: [
+            {
+              title: 'Web Templates',
+              icon: 'code',
+              links: [
+                {
+                  title: 'Free templates',
+                  route: '#'
+                },
+                {
+                  title: 'Premium templates',
+                  route: '#'
+                }
+              ]
+            },
+            {
+              title: 'Desings',
+              icon: 'draw',
+              links: [
+                {
+                  title: 'Web designs',
+                  route: '#'
+                },
+                {
+                  title: 'App designs',
+                  route: '#'
+                },
+                {
+                  title: 'Components designs',
+                  route: '#'
+                }
+              ]
+            },
+            {
+              title: 'Others',
+              icon: 'drag_indicator',
+              links: [
+                {
+                  title: 'Recent blogs',
+                  route: '#'
+                },
+                {
+                  title: 'Tutorial Videos',
+                  route: '#'
+                },
+                {
+                  title: 'Webinar',
+                  route: '#'
+                },
+              ]
+            }
+          ]
+        },
+        {
+          title: 'Pricing',
+          route: 'about'
+        },
+        {
+          title: 'Company',
+          subcategory: [
+            {
+              title: 'About us',
+              icon: 'home_repair_service',
+              links: [
+                {
+                  title:'About us',
+                  route:'#'
+                },
+                {
+                  title:'Support',
+                  route:'#'
+                },
+                {
+                  title:'Contact us',
+                  route:'#'
+                }
+              ]
+            },
+            {
+              title: 'Safe and Quality',
+              icon: 'shield',
+              links: [
+                {
+                  title:'Cookie settings',
+                  route: '#'
+                },
+                {
+                  title: 'Privacy policy',
+                  route: '#'
+                }
+              ]
+            }
+          ]
         }
       ]
     }
@@ -348,13 +275,8 @@ const removeStyle = () => {
     showDropdownIndex.value = null;
   }
 };
-
 // Register the event listener for resizing
 window.addEventListener('resize', removeStyle);
-
-
-
-
 </script>
 
 <style lang="scss">
