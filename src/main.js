@@ -6,18 +6,20 @@ import 'material-icons/iconfont/material-icons.css';
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 
-// vue navigation app bar
-import navBar from './components/NavBar.vue'
-
 import App from './App.vue'
 import router from './router'
 
 const app = createApp(App)
 
+// register components 
+import navBar from '@/components/navbar/NavBar.vue'
+import carousel from '@/components/carousel/CarrouselT1.vue'
+import searchInput from '@/components/utils/inputs/SearchInput.vue'
 // components
 app.component('NavBar', navBar)
+app.component('CarouselT1', carousel)
+app.component('SearchInput', searchInput)
 
-app.use(createPinia())
-app.use(router)
+// mount app 
+app.use(createPinia()).use(router).mount('#app')
 
-app.mount('#app')

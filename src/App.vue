@@ -1,6 +1,5 @@
 <script setup>
 import { RouterView } from 'vue-router'
-import Carousel from './components/CarrouselT1.vue'
 </script>
 
 <template>
@@ -8,14 +7,10 @@ import Carousel from './components/CarrouselT1.vue'
   <header class="header">
     <NavBar />  
   </header>
-
-  <Carousel />
   
   <RouterView />
 
   </body>
-
-  
 </template>
 
 <style scoped>

@@ -284,21 +284,21 @@ window.addEventListener('resize', removeStyle);
 
 @font-face {
   font-family: 'Poppins';
-  src: url('../assets/fonts/Poppins/Poppins-Regular.ttf') format("truetype");
+  src: url('@/assets/fonts/Poppins/Poppins-Regular.ttf') format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Poppins';
-  src: url('../assets/fonts/Poppins/Poppins-Medium.ttf') format("truetype");
+  src: url('@/assets/fonts/Poppins/Poppins-Medium.ttf') format("truetype");
   font-weight: 600;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'Poppins';
-  src: url('../assets/fonts/Poppins/Poppins-SemiBold.ttf') format("truetype");
+  src: url('@/assets/fonts/Poppins/Poppins-SemiBold.ttf') format("truetype");
   font-weight: 800;
   font-style: normal;
 }
@@ -365,7 +365,7 @@ a {
 
 /*=============== HEADER ===============*/
 .header {
-  position: fixed;
+  position: sticky;
   top: 0;
   left: 0;
   width: 100%;
