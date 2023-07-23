@@ -1,5 +1,5 @@
 <script setup>
-
+import { RouterView } from 'vue-router'
 import Carousel from './components/CarrouselT1.vue'
 </script>
 
@@ -11,6 +11,7 @@ import Carousel from './components/CarrouselT1.vue'
 
   <Carousel />
   
+  <RouterView />
 
   </body>
 
