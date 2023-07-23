@@ -1,17 +1,24 @@
 <script setup>
-import { RouterView } from 'vue-router'
-// import HelloWorld from './components/HelloWorld.vue'
+
+import Carousel from './components/CarrouselT1.vue'
 </script>
 
 <template>
   <body>
-    <header class="header">
-    <NavBar />
+  <header class="header">
+    <NavBar />  
   </header>
-<RouterView />
+
+  <Carousel />
+  
+
   </body>
 
   
 </template>
 
-<style scoped></style>
+<style scoped>
+  .carousel{
+    margin-top: 7em;
+  }
+</style>
