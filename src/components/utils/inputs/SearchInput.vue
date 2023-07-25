@@ -28,6 +28,10 @@ const onSearch = () => {
   background-color: #fff; 
   border-radius: 4px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+
+  @media(max-width: 600px) {
+    width: 150px;
+  }
 }
 
 .material__search {
@@ -36,6 +40,7 @@ const onSearch = () => {
   flex: 1;
   padding: 8px;
   font-size: 16px;
+  min-width:100px;
 }
 
 .search__icon {

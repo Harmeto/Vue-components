@@ -1,6 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 
+import ProfileBar from '../components/utils/profile/ProfileBar.vue';
+
 const isMenuOpen = ref(false)
 const rotation = ref(0)
 
@@ -20,11 +22,7 @@ const toggleMenu = () => {
         </div>
         <div class="right__section">
           <SearchInput placeholder="Search..." />
-          <div class="profile">
-          <span>Carlos Salvo</span>
-          <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="profile__picture">
-          <i class="material-icons dropdown__arrow">arrow_drop_down</i>
-        </div>
+          <ProfileBar />
         </div>
       </nav>
     </div>
@@ -58,6 +56,7 @@ height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px solid #DBDBDB;
     
     .title{
       margin: 2em;
@@ -91,25 +90,7 @@ height: 100%;
           border-radius: 5px;
           border-color: gray;
         }
-        .profile{
-        display: flex;
-        flex-direction: row;
-        align-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        margin: 2.5em;
-        transition: font-weight 0.4s ease;
         
-        img{
-          margin-left: 5px;
-          border-radius: 100%;
-          width: 2.5em;
-        }
-
-        &:hover span{
-          font-weight: bold;
-        }
-    }
     }
     
   }
@@ -126,7 +107,8 @@ height: 100%;
 .show-menu {
   z-index: 1;
   opacity: 1;
-  top: 3.5rem;
+  position: relative;
   pointer-events: initial;
+  top: 5em;
 }
 </style>
