@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue' // bring it back latter onMounted
+// import { useRoute } from 'vue-router'
 import { onClickOutside } from '@vueuse/core'
 
 defineProps({
@@ -19,8 +20,14 @@ defineProps({
   }
 })
 
+//refs
 const showDropdown = ref(false)
 const element_ref = ref(null)
+// const route = useRoute();
+const userId = ref(1);
+
+// obtain user id latter
+// onMounted(()=> { userId.value = route.params.id })
 
 const toggleDropdown = async () => {
   showDropdown.value = !showDropdown.value
@@ -37,7 +44,7 @@ onClickOutside(element_ref, () => showDropdown.value = false)
     <i class="material-icons dropdown__arrow">arrow_drop_down</i>
 
     <div v-if="showDropdown" class="dropdown-content">
-      <p>Perfil</p>
+      <router-link :to="`/profile/${userId}`"> Perfil </router-link>
       <p>Tareas</p>
       <p>Projectos</p>
     </div>

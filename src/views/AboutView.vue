@@ -1,14 +1,31 @@
 <script setup>
-import { ref } from 'vue'
-
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import ProfileBar from '../components/utils/profile/ProfileBar.vue';
+import Profile from '@/components/utils/profile/ProfileComponent.vue'
+// get routes
+const currentRoute = useRoute()
 
+// routes where not showing divs 
+const routesToExclude = ['/profile']
+
+const showDivs = computed(() => !routesToExclude.some(route => currentRoute.path.includes(route)))
+
+// refs
 const isMenuOpen = ref(false)
 const rotation = ref(0)
 
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
   rotation.value += 90
+}
+
+const user = {
+  name: 'carlos',
+  last_name: 'salvo',
+  profile_image: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
+  phone_number: '+56949812078',
+  mail: 'bad.thg@gmail.com'
 }
 </script>
 
@@ -31,9 +48,12 @@ const toggleMenu = () => {
         Side Nav
       </nav>
     </div>
-    <div class="div3">div3 </div>
-    <div class="div4">div4 </div>
-    <div class="div5">div5 </div>
+    <div v-if="showDivs" class="div6">
+      <div class="div3">div3 </div>
+      <div class="div4">div4 </div>
+      <div class="div5">div5 </div>
+    </div>
+    <Profile :user="user" v-else class="div6" />
   </div>
 </template>
 
@@ -100,9 +120,11 @@ height: 100%;
   width: 80%;
   opacity: 0;
 }
-.div3 { grid-area: 2 / 2 / 6 / 3; }
-.div4 { grid-area: 2 / 3 / 6 / 4; }
-.div5 { grid-area: 2 / 4 / 6 / 5; }
+.div3 { grid-area: 1 / 1 / 6 / 2; }
+.div4 { grid-area: 1 / 2 / 6 / 3; }
+.div5 { grid-area: 1 / 3 / 6 / 4; }
+
+.div6 { display:grid; grid-area: 2 / 2 / 6 / 5; position: relative; }
 
 .show-menu {
   z-index: 1;

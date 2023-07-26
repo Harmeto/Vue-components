@@ -21,6 +21,11 @@ const router = createRouter({
       path: '/nav',
       name: 'nav',
       component: () => import('../views/PageView.vue')
+    },
+    {
+      path: '/profile/:id',
+      name: 'profile',
+      component: () => import('../views/AboutView.vue')
     }
   ]
 })
